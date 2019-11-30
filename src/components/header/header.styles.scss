@@ -1,0 +1,74 @@
+.logo {
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.signin {
+  color: #343a40!important;
+  font-size: 30px;
+  padding-left: 10px;
+}
+
+.number-cart {
+  position: absolute;
+  right: 0px;
+  left: 17px;
+  bottom: 0;
+  top: 6px;
+  color: white;
+  font-size: 15px;
+}
+.cart {
+  position: relative;
+}
+
+.nav-item {
+  padding: 0 10px;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+
+.choice-user {
+  position: absolute;
+  min-width: 165px;
+  right: 0;
+  text-align: left;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #343a40;
+  z-index: 3;
+  border-radius: 3px;
+}
+
+.choice-user a {
+  text-decoration: none;
+  color: #343a40;
+}
+
+.select-option {
+  padding: 5px;
+}
+
+.select-option:hover {
+  background-color: #ccc;
+  text-decoration: none;
+}
+
+.btn-sign-in {
+  padding-left: 10px;;
+}
+
+.more {
+  color: #343a40;
+  padding-left: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.more :hover {
+  color: #535658;
+}

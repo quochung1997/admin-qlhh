@@ -1,26 +1,103 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Header from './components/header/header.component';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Axios from "axios";
+import Login from './components/login/login.component';
+import { withCookies } from "react-cookie";
+import API from "./API/define-api";
+import Item from "./components/item/item.component";
+import Category from './components/category/category.component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      user: null
+    }
+  }
+
+  componentDidMount = () => {
+    const { cookies } = this.props;
+    const user = cookies.cookies.user;
+
+    if (user) {
+      Axios.post(API.checklogin, JSON.parse(user)).then(res => {
+        if (res.status === 200) {
+          if (res.data.data) {
+            this.setState({
+              user: JSON.parse(user)
+            });
+          } else {
+            console.log(res.data.data)
+          }
+        }
+      });
+    }
+  }
+
+  login = async (user) => {
+    if (user) {
+      return await Axios.post(API.login, user).then(res => {
+        if (res.status === 200) {
+          if (res.data.success) {
+            this.props.cookies.set('user', user);
+            this.setState({
+              user
+            });
+            return true;
+          } else {
+            console.log(res.data.data);
+            return false;
+          }
+        }
+
+        else return false;
+      });
+    }
+
+    else return false;
+  }
+
+  render() {
+    const { user } = {
+      user: {
+        username: 'admin',
+        password: '123456',
+      }
+    }
+
+    if (!user) {
+      return (
+        <div className="container">
+          <Login login={this.login} />
+        </div>
+      )
+    }
+    else {
+      return (
+        <BrowserRouter>
+          <div className="App">
+            <Header />
+
+            <Switch>
+              <Route
+                path="/category"
+                render={(props) => <Category />}
+              />
+              <Route
+                path="/"
+                render={(props) => <Item />}
+              />
+
+            </Switch>
+          </div>
+        </BrowserRouter>
+      )
+    }
+
+  };
 }
 
-export default App;
+export default withCookies(App);

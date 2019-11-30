@@ -1,0 +1,34 @@
+.main {
+  padding-top: 30px;
+}
+
+h4 {
+  font-weight: bold;
+}
+
+.add {
+  font-weight: bold;
+  font-size: large;
+}
+
+.table-category tr td:last-child {
+  width: 130px;
+}
+
+.fix-size {
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.btn-edit {
+  color: rgb(24, 21, 240);
+}
+
+.btn-delete {
+  color: rgb(240, 21, 21);
+}
+
+.btn-add {
+  margin-right: 10px;
+}
