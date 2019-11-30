@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
 import API from '../../API/define-api'
-import { Link } from "react-router-dom";
 import './item.styles.scss';
 
 export default class Item extends Component {
@@ -10,7 +9,14 @@ export default class Item extends Component {
 
     this.state = {
       Items: [],
-      Search: ""
+      search: "",
+      isLoaded: false,
+      isAdding: false,
+      ItemName: "",
+      ItemCategory: "",
+      ItemPrice: 0,
+      ItemNumber: 0,
+      ItemBrand: ""
     }
   }
 
@@ -21,26 +27,20 @@ export default class Item extends Component {
           Items: res.data
         })
       }
+    });
+    this.setState({
+      isLoaded: true
     })
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  showAdding = () => {
+    this.setState({isAdding: true})
   }
 
   render() {
-    // const { Items } = this.state;
-    const Items = [
-      {
-        name: 'Iphone 11',
-        price: 1000,
-        number: 10,
-        category: 'Phone',
-        brand: 'Apple'
-      }
-    ]
+    const {Items, isLoaded, isAdding} = this.state
 
-    if (Items.length == 0) {
+    if (!isLoaded) {
       return <p>Loading...</p>
     }
 
@@ -52,41 +52,55 @@ export default class Item extends Component {
         <td>{Item.category}</td>
         <td>{Item.brand}</td>
         <td>
-          <Link className="col-sm-4" to={`/iteminfo/${item.id}`}>Detail</Link>          
-          <Link className="col-sm-4" to={`/edit_item/${item._id}`}>Edit</Link> 
-          <Link className="col-sm-4" to={`/delete_item/${item._id}`}>Delete</Link>
+          <span className="fix-size"><i className="far fa-edit btn-edit"></i></span>
+          <span className="fix-size"><i className="fas fa-trash-alt btn-delete"></i></span>
         </td>
       </tr>
     ))
 
     return (
       <div className="container main">
-        <h3>List Item</h3>
+        <h4>ITEM MANAGEMENT</h4>
+        
         <div className="row">
-          <div className="col-sm-2">
-            <Link to="/add_item" className="btn btn-primary">Add Item</Link>
-          </div>
-          <div className="col-sm-10">
-            <form onSubmit={this.handleSubmit}>
-              <div className="input-group">
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  value={this.state.search} 
-                  onChange={this.handleChange} 
-                  placeholder="Search"
-                  id="search"
-                />
-
-                <div className="input-group-btn">
-                  <button className="btn btn-default" type="submit">
-                    <i className="glyphicon glyphicon-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
+          <form className="input-group mb-3 col-sm-11" onSubmit={this.search}>
+            <input type="text" className="form-control" name="search" placeholder="Search" onChange={this.handleChange} />
+            <div className="input-group-append">
+              <button className="btn btn-primary" type="submit">Go</button>
+            </div>
+          </form>
+          <div className="input-group mb-3 col-sm-1">
+            <button className="btn btn-primary add" onClick={this.showAdding}>+</button>
           </div>
         </div>
+
+        {
+          isAdding ? (
+            <form onSubmit={this.addItem}>
+              <h5>Add item</h5>
+              <div className="form-group">
+                <label htmlFor="ItemName">Item Name:</label>
+                <input type="text" className="form-control" id="ItemName" name="ItemName" onChange={this.handleChange} required/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="ItemPrice">Item Price:</label>
+                <input type="text" className="form-control" id="ItemPrice" name="ItemPrice" onChange={this.handleChange} required/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="ItemNumber">Item Number:</label>
+                <input type="text" className="form-control" id="ItemNumber" name="ItemNumber" onChange={this.handleChange} required/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="ItemCategory">Item Category:</label>
+                <select className="form-control" id="ItemCategory" name="ItemCategory" onChange={this.handleChange} >
+                  <option label="Discount Percent">1</option>
+                  <option label="Discount Cash">2</option>
+                </select>
+              </div>
+            </form>
+          ) : null
+        }
+
       </div>
     )
   }

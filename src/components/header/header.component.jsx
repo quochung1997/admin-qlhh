@@ -32,7 +32,7 @@ export default class Header extends Component {
               <Link className="nav-link" to="#"><b>ORDER</b></Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#"><b>DISCOUNT</b></Link>
+              <Link className="nav-link" to="/discount"><b>DISCOUNT</b></Link>
             </li>
           </ul>
           <span className="fix-signin btn-sign-in">

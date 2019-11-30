@@ -8,6 +8,7 @@ import { withCookies } from "react-cookie";
 import API from "./API/define-api";
 import Item from "./components/item/item.component";
 import Category from './components/category/category.component';
+import Discount from './components/discount/discount.component';
 
 class App extends Component {
   constructor() {
@@ -85,6 +86,10 @@ class App extends Component {
               <Route
                 path="/category"
                 render={(props) => <Category />}
+              />
+              <Route
+                path="/discount"
+                render={(props) => <Discount />}
               />
               <Route
                 path="/"
