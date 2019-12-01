@@ -139,10 +139,10 @@ export default class Discount extends Component {
         <table className="table table-category">
           <thead>
             <tr>
-              <th>Sale Code String</th>
-              <th>Sale Code Type</th>
-              <th>Sale Code Value</th>
-              <th>Sale Code Description</th>
+              <th>Discount Code</th>
+              <th>Discount Code Type</th>
+              <th>Discount Code Value</th>
+              <th>Description</th>
               <th>From Date</th>
               <th>To Date</th>
               <th></th>

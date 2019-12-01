@@ -9,6 +9,7 @@ import API from "./API/define-api";
 import Item from "./components/item/item.component";
 import Category from './components/category/category.component';
 import Discount from './components/discount/discount.component';
+import Staff from './components/staff/staff.component';
 
 class App extends Component {
   constructor() {
@@ -83,6 +84,10 @@ class App extends Component {
             <Header />
 
             <Switch>
+              <Route
+                path="/staff"
+                render={(props) => <Staff />}
+              />
               <Route
                 path="/category"
                 render={(props) => <Category />}

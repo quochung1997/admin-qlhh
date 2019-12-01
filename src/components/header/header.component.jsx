@@ -20,7 +20,7 @@ export default class Header extends Component {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="#"><b>STAFF</b></Link>
+              <Link className="nav-link" to="/staff"><b>STAFF</b></Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/"><b>ITEM</b></Link>
